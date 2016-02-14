@@ -1,0 +1,50 @@
+[client]
+port                  = 3306
+socket                = /var/lib/mysql/mysql.sock
+default-character-set = utf8mb4
+no-auto-rehash
+
+[mysqld]
+datadir = /var/lib/mysql
+socket  = /var/lib/mysql/mysql.sock
+user    = mysql
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links  = 0
+
+# Log
+log_output          = FILE
+expire_logs_days    = 7
+sql_mode            = NO_ENGINE_SUBSTITUTION
+general_log         = ON
+general_log_file    = /var/log/mysql/query.log
+slow_query_log      = ON
+slow_query_log_file = /var/log/mysql-slow.log
+long_query_time=    1
+
+# Characters
+character-set-server  = utf8mb4
+collation-server      = utf8mb4_general_ci
+
+# InnoDB
+# e.g.
+# innodb_buffer_pool_size: RAM size 2G * 0.5 = 1G
+# innodb_log_file_size: innodb_buffer_pool_size * 0.2 = 256M
+innodb_buffer_pool_size         = {{innodb_buffer_pool_size|default(1G)}}
+innodb_log_file_size            = {{innodb_log_file_size|default(256M)}}
+innodb_stats_on_metadata        = off
+innodb_change_buffering         = changes
+innodb_file_format              = Barracuda
+innodb_file_per_table           = 1
+innodb_large_prefix
+
+[mysqldump]
+quick
+max_allowed_packet = 16M
+
+[mysqlhotcopy]
+interactive-timeout
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid

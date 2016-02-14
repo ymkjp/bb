@@ -1,0 +1,16 @@
+---
+
+# hostname
+- name: set hostname
+  hostname: name={{ hostname }}
+- name: set /etc/hosts
+  lineinfile: dest=/etc/hosts regexp=^127\.0\.0\.1 line='127.0.0.1 {{ hostname }} localhost localhost.localdomain'
+
+# Faster DNS
+- name: Writable resolv.conf
+  file: path=/etc/resolv.conf state=touch mode="u=rw,g=r,o=r"
+- name: Writable resolv.conf
+  blockinfile:
+    dest: /etc/resolv.conf
+    block: |
+      'options single-request-reopen'

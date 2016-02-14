@@ -1,0 +1,6 @@
+# https://galaxy.ansible.com/intro
+# $ ansible-galaxy install -r install_roles.yml
+
+# From galaxy
+- src: rvm_io.rvm1-ruby
+- src: yatesr.timezone

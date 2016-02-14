@@ -1,0 +1,7 @@
+# Ignore
+.vagrant
+*.log
+
+# Do not ignore
+!.python-version
+!.keep

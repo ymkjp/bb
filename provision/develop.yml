@@ -1,0 +1,17 @@
+---
+- name: Build a Rails development environment
+  hosts: all
+  become: yes
+  vars:
+    timezone: Asia/Tokyo
+    hostname: dev-01-bb
+    environtment: vagrant
+    rvm1_rubies:
+      - 'ruby-2.2.4'
+  roles:
+    - package
+    - etc
+    - { role: rvm_io.rvm1-ruby, tags: ruby, sudo: True }
+    - nginx
+    - mysql
+    - iptables

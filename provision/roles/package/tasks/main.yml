@@ -1,0 +1,42 @@
+---
+# Repositoryies
+- name: Add repositories
+  yum: name={{item}}
+  with_items:
+    - http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    - http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+    - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+    - http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
+
+- name: Update yum
+  yum: name=* state=latest
+- name: Install packages
+  yum: name={{ item }} state=installed enablerepo=epel,remi,rpmforge
+  with_items:
+    - git
+    - curl
+    - wget
+    - vim
+    - libselinux-python
+    - ruby-devel
+    - readline-devel
+    - ncurses-devel
+    - gdbm-devel
+    - openssl-devel
+    - libxslt-devel
+    - sqlite-devel
+    - libyaml
+    - libyaml-devel
+    - tcl-devel
+    - db4-devel
+    - libffi-devel
+    - gcc
+    - libxml2
+    - libxml2-devel
+    - libxslt
+    - libxslt-devel
+    - ImageMagick
+    - ImageMagick-devel
+
+- name: Install Development Tool
+  yum: name="@Development tools" state=present
